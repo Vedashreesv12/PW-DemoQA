@@ -1,0 +1,21 @@
+{
+  "name": "pw_demoqa",
+  "version": "1.0.0",
+  "description": "Playwright Project",
+  "license": "ISC",
+  "author": "Veda",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx cucumber-js --require-module ts-node/register --require Steps/**/*.ts Features/**/*.feature",
+    "cucumber": "npx cucumber-js",
+    "playwright": "npx playwright test"
+  },
+  "devDependencies": {
+    "@cucumber/cucumber": "^11.2.0",
+    "@playwright/test": "^1.51.0",
+    "playwright": "^1.51.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.2"
+  }
+}
