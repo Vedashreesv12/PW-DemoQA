@@ -2,6 +2,7 @@ import { chromium, Page, Browser } from "playwright";
 import { setDefaultTimeout } from "@cucumber/cucumber";
 
 const ELEMENTS_TILE = "//h5[text()='Elements']";
+const TEXT_BOX_MENU = "//span[text()='Text Box']";
 let browser: Browser | null = null;
 setDefaultTimeout(60 * 1000);
 
@@ -30,6 +31,18 @@ export class LandingPage {
     await elementsTile.click();
 
   }
+
+  async getPage(){
+    return this.page;
+  }
+
+  async clicktextboxMenu() {
+    console.log("DemoQA | Landing Page | Click Element Tile | Text Box");
+
+    let textboxTile = this.page!.locator(TEXT_BOX_MENU);
+    await textboxTile.click();
+  }
+
 
   async quit(){
     console.log("DemoQA | Landing Page | Close Browser");
