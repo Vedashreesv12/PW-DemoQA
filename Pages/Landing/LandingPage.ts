@@ -3,6 +3,7 @@ import { setDefaultTimeout } from "@cucumber/cucumber";
 
 const ELEMENTS_TILE = "//h5[text()='Elements']";
 const TEXT_BOX_MENU = "//span[text()='Text Box']";
+const CHECK_BOX_MENU = "//span[text()='Check Box']";
 setDefaultTimeout(60 * 1000);
 
 export class LandingPage {
@@ -36,5 +37,12 @@ export class LandingPage {
 
     let textboxTile = this.page!.locator(TEXT_BOX_MENU);
     await textboxTile.click();
+  }
+  
+  async clickcheckboxMenu() {
+    console.log("DemoQA | Landing Page | Click Checkbox  menu");
+
+    let checkboxTile = this.page!.locator(CHECK_BOX_MENU);
+    await checkboxTile.click();
   }
 }

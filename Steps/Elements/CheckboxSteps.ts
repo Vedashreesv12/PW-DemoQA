@@ -1,17 +1,11 @@
 import { Given, When } from '@cucumber/cucumber';
-import { CheckboxPage } from '../../Pages/Elements/CheckboxPage';
+import { CheckBoxPage } from '../../Pages/Elements/CheckboxPage';
 
-let checkboxPage: CheckboxPage;
+let checkboxPage: CheckBoxPage;
 
-Given('I am on the checkbox page', async function () {
-    checkboxPage = new CheckboxPage(this.page);
-    await checkboxPage.navigate();
+Given('I am on the CheckBox Page', async function () {
+    checkboxPage = new CheckBoxPage(this.page);
+    await checkboxPage.isCheckBoxPage();
 });
 
-When('I expand all checkboxes', async function () {
-    await checkboxPage.expandAll();
-});
 
-When('I select the {string} checkbox', async function (label) {
-    await checkboxPage.selectCheckbox(label);
-});

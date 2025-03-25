@@ -16,6 +16,10 @@ Then("Click on the TextBox Menu", async function () {
   await landingPage.clicktextboxMenu();
 });
 
+Then("Click on the CheckBox Menu", async function () {
+  await landingPage.clickcheckboxMenu();
+});
+
 Then("Sleep for {int} seconds", async function (time: number) {
   await this.page.waitForTimeout(time * 1000);
 });
