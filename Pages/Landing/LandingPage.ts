@@ -3,18 +3,17 @@ import { setDefaultTimeout } from "@cucumber/cucumber";
 
 const ELEMENTS_TILE = "//h5[text()='Elements']";
 const TEXT_BOX_MENU = "//span[text()='Text Box']";
-let browser: Browser | null = null;
 setDefaultTimeout(60 * 1000);
 
 export class LandingPage {
-  private page: Page | null = null;
+  private page: Page;
+
+  constructor(page: Page) {
+    this.page = page;
+  }
 
   async open() {
     console.log("DemoQA | Landing Page | Page opened");
-    if (!browser) {
-      browser = await chromium.launch({ headless: false });
-    }
-    this.page = await browser.newPage();
     await this.page.goto("https://demoqa.com/", { timeout: 60000 });
   }
 
@@ -32,23 +31,10 @@ export class LandingPage {
 
   }
 
-  async getPage(){
-    return this.page;
-  }
-
   async clicktextboxMenu() {
-    console.log("DemoQA | Landing Page | Click Element Tile | Text Box");
+    console.log("DemoQA | Landing Page | Click Text Box menu");
 
     let textboxTile = this.page!.locator(TEXT_BOX_MENU);
     await textboxTile.click();
-  }
-
-
-  async quit(){
-    console.log("DemoQA | Landing Page | Close Browser");
-
-    if(browser){
-      await browser.close();
-    }
   }
 }

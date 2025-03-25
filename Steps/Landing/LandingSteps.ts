@@ -1,22 +1,21 @@
 import { LandingPage } from "../../Pages/Landing/LandingPage";
 import { Given, Then } from "@cucumber/cucumber";
 
-const landingPage = new LandingPage();
-let textBoxPage = null;
+let landingPage: LandingPage;
 
-Given("I want to Open the Landing Page", async function () {
+Given("Open the Landing Page", async function () {
+  landingPage = new LandingPage(this.page);
   await landingPage.open();
 });
 
-Then("I want to click on Elements Tile", async function () {
+Then("Click on the Elements Tile", async function () {
   await landingPage.clickElements();
 });
-  
-  Then("I want to click on TextBox Menu", async function () {
-    await landingPage.clicktextboxMenu();
-  });
 
+Then("Click on the TextBox Menu", async function () {
+  await landingPage.clicktextboxMenu();
+});
 
-Then("I want to Close the Browser", async function () {
-  await landingPage.quit();
+Then("Sleep for {int} seconds", async function (time: number) {
+  await this.page.waitForTimeout(time * 1000);
 });

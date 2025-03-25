@@ -7,7 +7,7 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "test": "npx cucumber-js --require-module ts-node/register --require Steps/**/*.ts Features/**/*.feature",
+    "test": "npx cucumber-js --require-module ts-node/register --require ./support/hooks.ts --require Steps/**/*.ts Features/**/*.feature",
     "cucumber": "npx cucumber-js",
     "playwright": "npx playwright test"
   },
