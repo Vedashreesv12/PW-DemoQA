@@ -1,6 +1,13 @@
 import { expect, Page } from '@playwright/test';
 
-const CHECK_HEADER = '//h1[contains(Text(), "Check Box")]';
+const CHECK_HEADER = '//h1[contains(text(), "Check Box")]';
+const EXPAND_ALL = '//button[contains(@title, "Expand all")]';
+const COLLAPSE_ALL = '//button[contains(@title, "Collapse all")]';
+const NODE_TEXT = '//span[contains(text(), "%PLACEHOLDER%")]';
+const EXPAND_HOME = '//span[contains(text(), "Home")]';
+const COLLAPSE_HOME = '//span[contains(text(), "Home")]';
+const ELEMENTS = '//span[contains(text(), "Home")]';
+
 
 export class CheckBoxPage {
     constructor(private page: Page) {
@@ -18,67 +25,50 @@ export class CheckBoxPage {
     }
 
     async expandAll() {
+        console.log('DemoQA | CheckBox Page | Expanded All');
+
+        let expandAll = this.page.locator(EXPAND_ALL);
+        await expandAll.click();
+        await expect(this.page.locator(NODE_TEXT.replace('%PLACEHOLDER%', 'Notes'))).toBeVisible();
+        await expect(this.page.locator(NODE_TEXT.replace('%PLACEHOLDER%', 'Private'))).toBeVisible();
+
+        console.log('DemoQA | CheckBox Page | Verified Expand All');
     }
 
-async collapseAll() {
+    async collapseAll() {
+        console.log('DemoQA | CheckBox Page | Collapsed All');
+
+        let collapseAll = this.page.locator(COLLAPSE_ALL);
+        await collapseAll.click();
+        await expect(this.page.locator(NODE_TEXT.replace('%PLACEHOLDER%', 'Notes'))).not.toBeVisible();
+        console.log('DemoQA | CheckBox Page | Verified Collapse All');
     }
 
-async expandHome(){}
-async collapseHome(){}
-async expandDesktop(){}
-async collapseDesktop(){}
-async expandDocuments(){}
-async collapseDocuments(){}
-async expandOffice(){}
-async collapseOffice(){}
+    async expandHome() {
+        console.log('DemoQA | CheckBox Page | Expanding Home');
 
-    
-    // async fillCheckBox(fullName: string, email: string, currentAddress: string, permanentAddress: string) {
-    //     await this.page.fill('#userName', fullName);
-    //     await this.page.fill('#userEmail', email);
-    //     await this.page.fill('#currentAddress', currentAddress);
-    //     await this.page.fill('#permanentAddress', permanentAddress);
-    //     console.log('DemoQA | CheckBox Page | Filled all Check boxes');
-    // }
+        let expandHome = this.page.locator(EXPAND_HOME);
+        await expandHome.click();
+        await expect(this.page.locator(ELEMENTS)).toBeVisible();
 
-    // async submitForm() {
-    //     await this.page.click('#submit');
-    //     console.log('DemoQA | CheckBox Page | Form submitted');
-    // }
+        console.log('DemoQA | CheckBox Page | Verified Home Expansion');
+    }
 
-    // async verifyFormSubmission(fullName: string, email: string, currentAddress: string, permanentAddress: string) { 
-    //     await expect(this.page.locator('#name')).toContainCheck(fullName);
-    //     await expect(this.page.locator('#email')).toContainCheck(email);
-    //     await expect(this.page.locator('p#currentAddress')).toContainCheck(currentAddress);
-    //     await expect(this.page.locator('p#permanentAddress')).toContainCheck(permanentAddress);
+    async collapseHome() {
+        console.log('DemoQA | CheckBox Page | Collapsing Home');
 
-    //     console.log('DemoQA | CheckBox Page | Verified the form submission');
-    // }
+        let collapseHome = this.page.locator(COLLAPSE_HOME);
+        await collapseHome.click();
+        await expect(this.page.locator(ELEMENTS)).not.toBeVisible();
 
-    // async verifyFormSubmissioninDetail(fullName: string, email: string, currentAddress: string, permanentAddress: string) { 
-        
-    //     // Name
-    //     let fullNameUI = await this.page.locator('#name').CheckContent();
-    //     expect(fullNameUI).not.toBeNull(); 
-    //     expect(fullNameUI!.includes(fullName)).toBe(true);
-    //     console.log(`The page contains ${fullNameUI} and passed value is ${fullName}`);
+        console.log('DemoQA | CheckBox Page | Verified Home Collapse');
+    }
 
-    //     // Email
-    //     let emailUI = await this.page.locator('#email').CheckContent();
-    //     expect(emailUI).not.toBeNull(); 
-    //     expect(emailUI!.includes(email)).toBe(true);
-    //     console.log(`The page contains ${emailUI} and passed value is ${email}`);
+    async expandDesktop() { }
+    async collapseDesktop() { }
+    async expandDocuments() { }
+    async collapseDocuments() { }
+    async expandOffice() { }
+    async collapseOffice() { }
 
-    //     // currentAddress
-    //     let currentAddressUI = await this.page.locator('p#currentAddress').CheckContent();
-    //     expect(currentAddressUI).not.toBeNull(); 
-    //     expect(currentAddressUI!.includes(currentAddress)).toBe(true);
-    //     console.log(`The page contains ${currentAddressUI} and passed value is ${currentAddress}`);
-
-    //     // permanentAddress
-    //     let permanentAddressUI = await this.page.locator('p#permanentAddress').CheckContent();
-    //     expect(permanentAddressUI).not.toBeNull(); 
-    //     expect(permanentAddressUI!.includes(permanentAddress)).toBe(true);
-    //     console.log(`The page contains ${permanentAddressUI} and passed value is ${permanentAddress}`);
-    // }
 }
