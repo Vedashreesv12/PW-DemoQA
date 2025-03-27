@@ -38,3 +38,23 @@ When('Click on Collapse Parent and Verify', async function () {
 When('Click on Collapse GrandParent and Verify', async function () {
     await checkboxPage.collapseGrandParent();
 });
+
+Then('Check {}', async function (buttonLevel: string) {
+    if(buttonLevel === 'GrandParent')
+        await checkboxPage.checkGrandParent();
+    if(buttonLevel === 'Parent')
+        await checkboxPage.checkParent();
+    if(buttonLevel === 'Child')
+        await checkboxPage.checkChild();
+});
+
+
+Then('Uncheck {}', async function (buttonLevel: string) {
+    if(buttonLevel === 'GrandParent')
+        await checkboxPage.uncheckGrandParent();
+    if(buttonLevel === 'Parent')
+        await checkboxPage.uncheckParent();
+    if(buttonLevel === 'Child')
+        await checkboxPage.uncheckChild();
+});
+
