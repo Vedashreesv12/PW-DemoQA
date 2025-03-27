@@ -1,12 +1,14 @@
-import { expect, Page } from '@playwright/test';
+import { expect, Locator, Page } from '@playwright/test';
 
+const ELEMENTS = '//span[contains(text(), "Home")]';
 const CHECK_HEADER = '//h1[contains(text(), "Check Box")]';
 const EXPAND_ALL = '//button[contains(@title, "Expand all")]';
 const COLLAPSE_ALL = '//button[contains(@title, "Collapse all")]';
 const NODE_TEXT = '//span[contains(text(), "%PLACEHOLDER%")]';
-const EXPAND_HOME = '//span[contains(text(), "Home")]';
-const COLLAPSE_HOME = '//span[contains(text(), "Home")]';
-const ELEMENTS = '//span[contains(text(), "Home")]';
+// const EXPAND_GRANDPARENT= '//span[contains(text(), "Home")]';
+// const COLLAPSE_HOME = '//span[contains(text(), "Home")]';
+const EXPAND_COLLAPSE_BUTTON = '//label[span[contains(text(), "%PLACEHOLDER%")]]/preceding-sibling::button';
+
 
 
 export class CheckBoxPage {
@@ -44,25 +46,65 @@ export class CheckBoxPage {
         console.log('DemoQA | CheckBox Page | Verified Collapse All');
     }
 
-    async expandHome() {
-        console.log('DemoQA | CheckBox Page | Expanding Home');
-
-        let expandHome = this.page.locator(EXPAND_HOME);
-        await expandHome.click();
-        await expect(this.page.locator(ELEMENTS)).toBeVisible();
-
-        console.log('DemoQA | CheckBox Page | Verified Home Expansion');
+    async expandGrandParent() {
+        console.log('DemoQA | CheckBox Page | Expanding Grandparent');
+        await this.expandCollapseButton('Home', true);
     }
 
-    async collapseHome() {
-        console.log('DemoQA | CheckBox Page | Collapsing Home');
-
-        let collapseHome = this.page.locator(COLLAPSE_HOME);
-        await collapseHome.click();
-        await expect(this.page.locator(ELEMENTS)).not.toBeVisible();
-
-        console.log('DemoQA | CheckBox Page | Verified Home Collapse');
+    async collapseGrandParent() {
+        console.log('DemoQA | CheckBox Page | Collapsing Grandparent');
+        await this.expandCollapseButton('Home', false);
     }
+
+    async expandParent() {
+        console.log('DemoQA | CheckBox Page | Expanding Parent');
+        await this.expandCollapseButton('Documents', true);
+    }
+
+    async expandChild() {
+        console.log('DemoQA | CheckBox Page | Expanding Child');
+        await this.expandCollapseButton('Office', true);
+    }
+
+    async collapseParent() {
+        console.log('DemoQA | CheckBox Page | Collapse Parent');
+        await this.expandCollapseButton('Documents', false);
+    }
+
+    async collapseChild() {
+        console.log('DemoQA | CheckBox Page | Collapse Child');
+        await this.expandCollapseButton('Office', false);
+    }
+
+    async expandCollapseButton(buttonName: string, isExpandedExpected: boolean) {
+        let expButton = this.page.locator(EXPAND_COLLAPSE_BUTTON.replace('%PLACEHOLDER%', buttonName));
+        await expButton.click();
+        let isExpanded = await this.isButtonExpandedOrCollapsed(expButton);
+        expect(isExpanded).toBe(isExpandedExpected);
+    }
+
+    async isButtonExpandedOrCollapsed(buttonLocator: Locator) {
+        const isExpanded = (await buttonLocator.locator('svg').getAttribute('class'))?.includes('rct-icon-expand-open');
+        console.log(`Is Button is Expanded: ${isExpanded}`);
+        return isExpanded;
+    }
+
+
+
+
+    // Verify collapse state
+    // const isStillExpanded = await this.isButtonExpanded(grandparentButton);
+    // console.log(`Veda: Grandparent collapsed? ${!isStillExpanded}`);
+
+    // async collapseGrandparent() {
+    //     console.log('DemoQA | CheckBox Page | Collapsing Home');
+
+    //     let collapseHome = this.page.locator();
+    //     await collapseHome.click();
+    //     await expect(this.page.locator(ELEMENTS)).not.toBeVisible();
+
+    //     console.log('DemoQA | CheckBox Page | Verified Home Collapse');
+    // }
 
     async expandDesktop() { }
     async collapseDesktop() { }
