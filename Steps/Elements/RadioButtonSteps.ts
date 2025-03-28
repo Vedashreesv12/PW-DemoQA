@@ -3,11 +3,11 @@ import { RadioButtonPage } from '../../Pages/Elements/RadioButtonPage';
 
 let radioButtonPage: RadioButtonPage;
 
-Given('I am on the radio button page', async function () {
+Given('I am on the RadioButton Page', async function () {
     radioButtonPage = new RadioButtonPage(this.page);
-    await radioButtonPage.navigate();
+    await radioButtonPage.isRadioButtonPage();
 });
 
-When('I select the {string} radio button', async function (option) {
+When('Select the {string} radio button', async function (option) {
     await radioButtonPage.selectRadioButton(option);
 });

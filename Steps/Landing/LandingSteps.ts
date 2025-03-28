@@ -20,6 +20,10 @@ Then("Click on the CheckBox Menu", async function () {
   await landingPage.clickcheckboxMenu();
 });
 
+Then("Click on the RadioButton Menu", async function () {
+  await landingPage.clickradiobuttonMenu();
+});
+
 Then("Sleep for {int} seconds", async function (time: number) {
   await this.page.waitForTimeout(time * 1000);
 });

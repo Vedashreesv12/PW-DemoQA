@@ -4,6 +4,8 @@ import { setDefaultTimeout } from "@cucumber/cucumber";
 const ELEMENTS_TILE = "//h5[text()='Elements']";
 const TEXT_BOX_MENU = "//span[text()='Text Box']";
 const CHECK_BOX_MENU = "//span[text()='Check Box']";
+const RADIO_BUTTON_MENU = "//span[text()='Radio Button']";
+
 setDefaultTimeout(60 * 1000);
 
 export class LandingPage {
@@ -44,5 +46,11 @@ export class LandingPage {
 
     let checkboxTile = this.page!.locator(CHECK_BOX_MENU);
     await checkboxTile.click();
+  }
+  async clickradiobuttonMenu() {
+    console.log("DemoQA | Landing Page | Click RadioButton  menu");
+
+    let radiobuttonTile = this.page!.locator(RADIO_BUTTON_MENU);
+    await radiobuttonTile.click();
   }
 }
