@@ -2,6 +2,7 @@ import { expect, Page } from '@playwright/test';
 
 const RADIO_HEADER = '//h1[contains(text(), "Radio Button")]';
 const RADIO_BUTTON = '//label[contains(text(), "%PLACEHOLDER%")]/parent::div';
+const RADIO_SELECTION = "//p[contains(text(), 'You have selected ')]/span[contains(text(), '%PLACEHOLDER%')]";
 
 
 export class RadioButtonPage {
@@ -20,6 +21,11 @@ export class RadioButtonPage {
     }
 
     async selectRadioButton(option: string) {
-            await this.page.locator(RADIO_BUTTON.replace('%PLACEHOLDER%', option)).click();
-        }
+        await this.page.locator(RADIO_BUTTON.replace('%PLACEHOLDER%', option)).click();
     }
+
+    async isRadioButtonSelected(option: string) {
+        const radioVerification = await this.page.locator(RADIO_SELECTION.replace('%PLACEHOLDER%', option)).textContent();
+        expect(radioVerification).toEqual(option);
+    }
+}

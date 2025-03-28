@@ -23,19 +23,19 @@ Feature: Demo QA Elements Functions
     #     Then Check 'GrandParent'
     #     Then Uncheck 'GrandParent'
 
-        # When Click on Expand Parent and Verify
-        # Then Check 'Parent'
-        # Then Uncheck 'Parent'
+    # When Click on Expand Parent and Verify
+    # Then Check 'Parent'
+    # Then Uncheck 'Parent'
 
-        # When Click on Expand Child and Verify
-        # Then Check 'Child'
-        # Then Uncheck 'Child'
-        # When Click on Collapse Child and Verify
+    # When Click on Expand Child and Verify
+    # Then Check 'Child'
+    # Then Uncheck 'Child'
+    # When Click on Collapse Child and Verify
 
-        # When Click on Collapse Parent and Verify
-        # When Click on Collapse GrandParent and Verify
+    # When Click on Collapse Parent and Verify
+    # When Click on Collapse GrandParent and Verify
 
-        # Then Sleep for 5 seconds
+    # Then Sleep for 5 seconds
 
 
     Scenario: Validate RadioButton - Select Radio Button
@@ -43,8 +43,8 @@ Feature: Demo QA Elements Functions
         When Click on the Elements Tile
         And Click on the RadioButton Menu
         Then I am on the RadioButton Page
-        When Select the 'Yes' radio button
-        Then Sleep for 5 seconds
+        When Select and verify the 'Yes' radio button
+        When Select and verify the 'Impressive' radio button
+        Then Sleep for 10 seconds
 
 
-   

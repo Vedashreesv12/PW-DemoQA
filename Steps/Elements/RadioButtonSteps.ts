@@ -8,6 +8,8 @@ Given('I am on the RadioButton Page', async function () {
     await radioButtonPage.isRadioButtonPage();
 });
 
-When('Select the {string} radio button', async function (option) {
+When('Select and verify the {string} radio button', async function (option) {
     await radioButtonPage.selectRadioButton(option);
+    await radioButtonPage.isRadioButtonSelected(option);
 });
+
